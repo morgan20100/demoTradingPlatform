@@ -1,0 +1,172 @@
+<div class="example-box" cdkDrag>
+  <div class="example-handle" cdkDragHandle></div>
+  <p>Option screen {{ this.displayOptions.data.length }}</p>
+  <div>
+    <mat-form-field class>
+      <mat-label>Option - Expiry</mat-label>
+      <mat-select
+        [(ngModel)]="selectedProduct"
+        (selectionChange)="getSelectedProduct()"
+      >
+        <mat-option
+          *ngFor="let product of querySetProducts | callback: filterOnOptions"
+          [value]="product"
+        >
+          {{ product.fields.name }}
+          {{ product.fields.expiryDisplay }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <table mat-table [dataSource]="displayOptions" class="mat-elevation-z8">
+      <ng-container matColumnDef="market">
+        <th mat-header-cell *matHeaderCellDef>Market</th>
+
+        <td mat-cell *matCellDef="let element" class="matCellMarket">
+          {{ element.displayName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="iv">
+        <th mat-header-cell *matHeaderCellDef>IV</th>
+        <td mat-cell *matCellDef="let element" class="matCellMarket">
+          {{ element.iv | number: '2.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="callPosition">
+        <th mat-header-cell *matHeaderCellDef>CallPos.</th>
+        <td mat-cell *matCellDef="let element" class="matCellMarket">
+          <span *ngIf="element.callPosition > 0">+</span
+          >{{ element.callPosition }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="callBid">
+        <th mat-header-cell *matHeaderCellDef>CallBid</th>
+
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [ngClass]="{
+            fontSell: element.move === -1,
+            fontBuy: element.move === 1,
+            fontNeutral: element.move === 0,
+            bidHovered: element.callBidHovered === true
+          }"
+          (click)="tradeOption($event, element, -1, 'Call')"
+          class="bidOffer"
+          (mouseover)="element.callBidHovered = true"
+          (mouseout)="element.callBidHovered = false"
+        >
+          {{ element.callBid | number: '1.1-1' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="callOffer">
+        <th mat-header-cell *matHeaderCellDef>CallOffer</th>
+
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [ngClass]="{
+            fontSell: element.move === -1,
+            fontBuy: element.move === 1,
+            fontNeutral: element.move === 0,
+            offerHovered: element.callOfferHovered === true
+          }"
+          (click)="tradeOption($event, element, 1, 'Call')"
+          class="bidOffer"
+          (mouseover)="element.callOfferHovered = true"
+          (mouseout)="element.callOfferHovered = false"
+        >
+          {{ element.callOffer | number: '1.1-1' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deltaCall">
+        <th mat-header-cell *matHeaderCellDef>D. Call</th>
+
+        <td mat-cell *matCellDef="let element">
+          {{ element.deltaCall | number: '1.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="strike">
+        <th mat-header-cell *matHeaderCellDef>Strike</th>
+
+        <td mat-cell *matCellDef="let element" class="strike">
+          {{ element.strike }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deltaPut">
+        <th mat-header-cell *matHeaderCellDef>D. Put</th>
+
+        <td mat-cell *matCellDef="let element">
+          {{ element.deltaPut | number: '1.2-2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="putBid">
+        <th mat-header-cell *matHeaderCellDef>PutBid</th>
+
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [ngClass]="{
+            fontSell: element.move === -1,
+            fontBuy: element.move === 1,
+            fontNeutral: element.move === 0,
+            bidHovered: element.putBidHovered === true
+          }"
+          (click)="tradeOption($event, element, -1, 'Put')"
+          class="bidOffer"
+          (mouseover)="element.putBidHovered = true"
+          (mouseout)="element.putBidHovered = false"
+        >
+          {{ element.putBid | number: '1.1-1' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="putOffer">
+        <th mat-header-cell *matHeaderCellDef>PutOffer</th>
+
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [ngClass]="{
+            fontSell: element.move === -1,
+            fontBuy: element.move === 1,
+            fontNeutral: element.move === 0,
+            offerHovered: element.putOfferHovered === true
+          }"
+          (click)="tradeOption($event, element, 1, 'Put')"
+          class="bidOffer"
+          (mouseover)="element.putOfferHovered = true"
+          (mouseout)="element.putOfferHovered = false"
+        >
+          {{ element.putOffer | number: '1.1-1' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="putPosition">
+        <th mat-header-cell *matHeaderCellDef>PutPos.</th>
+        <td mat-cell *matCellDef="let element" class="matCellMarket">
+          <span *ngIf="element.putPosition > 0">+</span
+          >{{ element.putPosition }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ts">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ts * 1000 | date: 'HH:mm:ss' }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

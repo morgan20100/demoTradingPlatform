@@ -1,0 +1,22 @@
+.mat-form-field {
+  width: 60px;
+  text-align: center;
+}
+
+.fontSell {
+  color: red;
+}
+
+.fontBuy {
+  color: blue;
+}
+
+.buttonSell {
+  color: white;
+  background-color: rgb(228, 82, 82);
+}
+
+.buttonBuy {
+  color: white;
+  background-color: rgb(57, 96, 202);
+}

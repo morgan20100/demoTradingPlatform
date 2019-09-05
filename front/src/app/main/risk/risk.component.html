@@ -1,0 +1,69 @@
+<div class="example-box" cdkDrag>
+  <div class="example-handle" cdkDragHandle></div>
+  <p>Greeks and MTM</p>
+  <table class="mat-table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Cash Delta</th>
+        <th scope="col">Cash Gamma</th>
+        <th scope="col">Vega</th>
+        <th scope="col">Theta</th>
+        <th scope="col">Rho</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of querySetProducts | callback: filterOptions">
+        <td>{{ product.fields.name }} {{ product.fields.expiryDisplay }}</td>
+        <td>
+          {{ this.getOptionDeltasAndSumUpGreeks(product) | number: '1.0-0' }}
+        </td>
+        <td>{{ this.getOptionGammas(product) | number: '1.0-0' }}</td>
+        <td>{{ this.getOptionVegas(product) | number: '1.0-0' }}</td>
+        <td>{{ this.getOptionThetas(product) | number: '1.0-0' }}</td>
+        <td>{{ this.getOptionRhos(product) | number: '1.0-0' }}</td>
+      </tr>
+      <tr *ngFor="let product of querySetProducts | callback: filterFutures">
+        <td>{{ product.fields.name }} {{ product.fields.expiryDisplay }}</td>
+        <td>{{ this.getFutureDeltas(product) | number: '1.0-0' }}</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td class="darkBackground">Total</td>
+        <td class="darkBackground">
+          {{ this.getSumDeltas() | number: '1.0-0' }}
+        </td>
+        <td class="darkBackground">
+          {{ this.getSumGammas() | number: '1.0-0' }}
+        </td>
+        <td class="darkBackground">
+          {{ this.getSumVegas() | number: '1.0-0' }}
+        </td>
+        <td class="darkBackground">
+          {{ this.getSumThetas() | number: '1.0-0' }}
+        </td>
+        <td class="darkBackground">
+          {{ this.getSumRhos() | number: '1.0-0' }}
+        </td>
+      </tr>
+      <tr>
+        <td>Mark To Market</td>
+        <td>
+          <span *ngIf="this.getSumMTMs() < 0" class="fontNegative"
+            >{{ this.getSumMTMs() | currency: 'EUR':'symbol':'1.0-0' }}
+          </span>
+          <span *ngIf="this.getSumMTMs() > 0" class="fontPositive"
+            >{{ this.getSumMTMs() | currency: 'EUR':'symbol':'1.0-0' }}
+          </span>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
