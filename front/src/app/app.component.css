@@ -1,0 +1,11 @@
+.app {
+  background-color: #282c34;
+  height: 1500px;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  color: orange;
+  font-size: 3em;
+}
