@@ -1,0 +1,15 @@
+<form [formGroup]="authForm" (ngSubmit)="loginForm()">
+  <label>Username</label><br />
+  <input type="text" formControlName="username" /><br />
+  <label>Password</label><br />
+  <input type="password" formControlName="password" /><br />
+  <button type="submit">
+    <span *ngIf="!registerMode">Login</span>
+    <span *ngIf="registerMode">Register</span>
+  </button>
+</form>
+<br />
+<span *ngIf="!registerMode" (click)="registerMode = true">Register here</span>
+<span *ngIf="registerMode" (click)="registerMode = false"
+  >Already have an account</span
+>

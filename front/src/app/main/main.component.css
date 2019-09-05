@@ -1,0 +1,13 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.leftPanel {
+  width: 700px;
+}
+
+.rightPanel {
+  width: 1150px;
+}

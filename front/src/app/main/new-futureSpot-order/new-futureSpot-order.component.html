@@ -1,0 +1,42 @@
+<form [formGroup]="form">
+  <span
+    [ngClass]="{
+      fontSell: this.data.buy === -1,
+      fontBuy: this.data.buy === 1
+    }"
+  >
+    {{ this.orderType }}</span
+  >
+  <mat-form-field class="example-margin">
+    <input matInput type="number" formControlName="size" />
+  </mat-form-field>
+  {{ data.element.displayName }} @
+  <span
+    [ngClass]="{
+      fontSell: this.data.buy === -1,
+      fontBuy: this.data.buy === 1
+    }"
+    *ngIf="this.data.buy == 1"
+    >{{ data.element.offer }}</span
+  >
+  <span
+    [ngClass]="{
+      fontSell: this.data.buy === -1,
+      fontBuy: this.data.buy === 1
+    }"
+    *ngIf="this.data.buy == -1"
+    >{{ data.element.bid }}</span
+  >
+
+  <button
+    mat-raised-button
+    class="btn pull-right"
+    [ngClass]="{
+      buttonSell: this.data.buy === -1,
+      buttonBuy: this.data.buy === 1
+    }"
+    (click)="sendOrder()"
+  >
+    {{ this.orderType }} order
+  </button>
+</form>

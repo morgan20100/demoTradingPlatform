@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* margin-top: -15px; */
+  /* background-color: #282c34; */
+}
+
+button {
+  color: #444444;
+  background-color: #f3f3f3;
+  padding: 5px 10px;
+  border-radius: 2px;
+  outline: none;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+button:disabled {
+  color: #f3f3f3;
+  background-color: #444444;
+  cursor: not-allowed;
+}
+
+input,
+textarea {
+  width: 80%;
+  font-size: 0.8em;
+  margin: 8px 0px;
+  padding: 10px 10px;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.custom-new-order-css {
+  /* width: 400px; */
+  position: absolute;
+  font-size: 12px;
+}
+.custom-new-order-css mat-dialog-container {
+  width: 380px;
+  padding: 9px 10px 5px 15px;
+}
+
+.custom-new-order-css mat-dialog-container button {
+  margin-top: 4px;
+}

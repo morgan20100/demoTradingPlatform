@@ -1,0 +1,82 @@
+<div class="example-box" cdkDrag>
+  <div class="example-handle" cdkDragHandle></div>
+  <p>Spot / Future live prices</p>
+  <table mat-table [dataSource]="displayFutureSpots" class="mat-elevation-z8">
+    <ng-container matColumnDef="market">
+      <th mat-header-cell *matHeaderCellDef>Market</th>
+
+      <td mat-cell *matCellDef="let element" class="matCellMarket">
+        {{ element.displayName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>Pos.</th>
+      <td mat-cell *matCellDef="let element" class="matCellMarket">
+        <span *ngIf="element.productType === this.productType">
+          <span *ngIf="element.size > 0">+</span
+          >{{ element.size | number: '1.0-0' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bid">
+      <th mat-header-cell *matHeaderCellDef>
+        Bid
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="{
+          fontSell: element.move === -1,
+          fontBuy: element.move === 1,
+          fontNeutral: element.move === 0,
+          bidHovered: element.bidHovered === true
+        }"
+        (click)="tradeFutureSpot($event, element, -1)"
+        class="bidOffer"
+        (mouseover)="element.bidHovered = true"
+        (mouseout)="element.bidHovered = false"
+      >
+        <!-- [ngStyle]="{ 'background-color': element.increase ? 'green' : 'red' }" -->
+        <span *ngIf="element.productType === this.productType">{{
+          element.bid
+        }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="offer">
+      <th mat-header-cell *matHeaderCellDef>Offer</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="{
+          fontSell: element.move === -1,
+          fontBuy: element.move === 1,
+          fontNeutral: element.move === 0,
+          offerHovered: element.offerHovered === true
+        }"
+        (click)="tradeFutureSpot($event, element, 1)"
+        class="bidOffer"
+        (mouseover)="element.offerHovered = true"
+        (mouseout)="element.offerHovered = false"
+      >
+        <span *ngIf="element.productType === this.productType">{{
+          element.offer
+        }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ts">
+      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="element.productType === this.productType">{{
+          element.ts * 1000 | date: 'HH:mm:ss'
+        }}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

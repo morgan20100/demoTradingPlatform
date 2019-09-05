@@ -1,0 +1,15 @@
+{
+  "database": {
+    "host": "hostname",
+    "user": "username",
+    "passwd": "password",
+    "database": "databaseName"
+  },
+  "IG": {
+    "username": "username",
+    "password": "password",
+    "api_key": "apiKey",
+    "acc_type": "LIVE",
+    "acc_number": "accountNumber"
+  }
+}
