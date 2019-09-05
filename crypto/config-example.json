@@ -1,0 +1,27 @@
+{
+  "exchanges_watchlist": ["binance", "poloniex", "kraken"],
+  "tickers_watchlist": [
+    "BTC/USDT",
+    "LTC/BTC",
+    "BTC/USD",
+    "ETH/BTC",
+    "XRP/BTC",
+    "XMR/BTC",
+    "DASH/BTC",
+    "ZEC/BTC"
+  ],
+  "exchanges": {
+    "binance": {
+      "apiKey": "yourApiKey",
+      "secret": "yourSecret"
+    },
+    "poloniex": {
+      "apiKey": "yourApiKey",
+      "secret": "yourSecret"
+    },
+    "kraken": {
+      "apiKey": "yourApiKey",
+      "secret": "yourSecret"
+    }
+  }
+}
