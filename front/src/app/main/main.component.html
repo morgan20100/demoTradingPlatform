@@ -1,0 +1,13 @@
+<div><app-top-bar></app-top-bar></div>
+<div class="layout">
+  <div class="leftPanel">
+    <app-display-future-spot [productType]="'S'"></app-display-future-spot>
+    <app-position-component></app-position-component>
+    <app-trade-component></app-trade-component>
+  </div>
+  <div class="rightPanel">
+    <app-display-future-spot [productType]="'F'"></app-display-future-spot>
+    <app-display-option></app-display-option>
+    <app-risk-component></app-risk-component>
+  </div>
+</div>
