@@ -1,8 +1,16 @@
 # demoTradingPlatform
 [Work in progress] Demo Trading Platform Futures &amp; Options + Crypto arbitrage dashboard
 
+# FrontEnd
 
-Working on a demo trading platform for futures / options in Python:
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0-next.1.
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+
+Working on a demo trading platform for futures / options in Python:\
 • I get the live prices from an online broker using websockets and put them in cache in Redis and every 5 secs in my SQL database
 • Django for the backend, Angular for the front end
 • I am connecting the back to front in websockets for pushing the live prices from my cache, API otherwise for http requests
