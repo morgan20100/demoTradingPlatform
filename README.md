@@ -12,6 +12,6 @@ Screenshot attached\
 • The second part of the platform is a mix between Eurex and a simplified version of Optiver’s, where I display the option prices with deltas, IV, strike positions etc. I built the risk module displaying the greeks per product/expiry (cash deltas, gammas and others) and MtM\
 
 
-# Crypto pair dashboard:\
+# Crypto pair dashboard:
 • Connecting to different crypto exchanges to retrieve bid/ask of a watchlist\
 • Prices are then processed and filtered to find arbitrage "opportunities" between exchanges (gross margin for now), stored in cache then pushed to the front with websockets\
